@@ -11,7 +11,7 @@ export class ProductService {
   ) {}
 
   /**
-   * @description Gets the current pay plan period
+   * @description Gets the list of the products
    * @returns {Promise<Product | null>}
    * @public
    */
