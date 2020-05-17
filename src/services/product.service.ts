@@ -15,7 +15,7 @@ export class ProductService {
    * @returns {Promise<Product | null>}
    * @public
    */
-  public async findByRegion(region: string): Promise<Product | null> {
-    return this.productRepository.findOne({where: {and: [{region: region}]}});
+  public async findByRegion(region: string): Promise<Product[] | null> {
+    return this.productRepository.find({where: {region: region}});
   }
 }

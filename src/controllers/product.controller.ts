@@ -23,7 +23,7 @@ export class ProductController {
       },
     },
   })
-  async findByRegion(@param.path.string('region') region: string): Promise<Product | null> {
+  async findByRegion(@param.path.string('region') region: string): Promise<Product[] | null> {
     return this.productService.findByRegion(region);
   }
 }
