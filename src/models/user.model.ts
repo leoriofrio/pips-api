@@ -1,4 +1,5 @@
-import {Entity, model, property} from '@loopback/repository';
+import {Entity, hasMany, model, property} from '@loopback/repository';
+import {Proform, ProformRelations} from './proform.model';
 
 @model({
   name: 'user',
@@ -110,11 +111,15 @@ export class User extends Entity {
   })
   status: string;
 
+  @hasMany(() => Proform, {
+    keyTo: 'user_id'
+  })
+  proform?: Proform[];
 
 }
 
 export interface UserRelations {
-  // describe navigational properties here
+  proform?: ProformRelations[];
 }
 
 export type UserWithRelations = User & UserRelations;
