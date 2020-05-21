@@ -1,13 +1,20 @@
-import {belongsTo, Entity, model, property} from '@loopback/repository';
+import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
 import {UserWithRelations} from '.';
+import {ProformDetail, ProformDetailRelations} from './proformdetail.model';
 import {User} from './user.model';
+
+/**
+ * alter table proform add constraint FK_PROJECTS_RELATIONSHIP_USER foreign key (user_id)
+      references user (ID) on delete restrict on update restrict;
+
+ */
 
 @model({
   name: 'proform',
   settings: {
     foreignKeys: {
-      fk_project_pay_plan_period: {
-        name: 'FK_PROJECTS_RELATIONSHIP_PAY_PLAN',
+      fk_project_user: {
+        name: 'FK_PROJECTS_RELATIONSHIP_USER',
         entity: 'user',
         entityKey: 'id',
         foreignKey: 'user_id',
@@ -122,10 +129,17 @@ export class Proform extends Entity {
     },
   })
   state_number: string;
+
+  @hasMany(() => ProformDetail, {
+    keyTo: 'proform_id'
+  })
+  proformDetail?: ProformDetail[];
+
 }
 
 export interface ProformRelations {
   user: UserWithRelations;
+  proformDetail?: ProformDetailRelations[];
 }
 
 export type ProformWithRelations = Proform & ProformRelations;

@@ -6,7 +6,7 @@ import {RestExplorerBindings, RestExplorerComponent} from '@loopback/rest-explor
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
-import {ClientService, CollegeService, ProductService, ProformService, UserService} from './services';
+import {ClientService, CollegeService, ProductService, ProformdetailService, ProformService, UserService} from './services';
 
 export class PipsApiApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -46,6 +46,6 @@ export class PipsApiApplication extends BootMixin(
     this.bind(BindingKey.create<UserService>('services.user')).toClass(UserService);
     this.bind(BindingKey.create<ClientService>('services.client')).toClass(ClientService);
     this.bind(BindingKey.create<ProformService>('services.proform')).toClass(ProformService);
-
+    this.bind(BindingKey.create<ProformdetailService>('services.proformDetail')).toClass(ProformdetailService);
   }
 }
