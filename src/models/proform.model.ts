@@ -83,7 +83,7 @@ export class Proform extends Entity {
       columnName: 'date_proform',
     },
   })
-  date_proform: string;
+  date_proform: Date;
 
   @property({
     type: 'date',
@@ -92,7 +92,7 @@ export class Proform extends Entity {
       columnName: 'date_delivery',
     },
   })
-  date_delivery: string;
+  date_delivery: Date;
 
   @property({
     type: 'string',

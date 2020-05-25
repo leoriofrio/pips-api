@@ -39,7 +39,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'string',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'degree',
     },
@@ -66,7 +66,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'sale_direct',
     },
@@ -75,7 +75,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'sale_external_library',
     },
@@ -84,7 +84,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'sale_event',
     },
@@ -93,7 +93,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'sale_teacher',
     },
@@ -102,7 +102,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'sale_infrastructure',
     },
@@ -111,7 +111,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'sale_scholarships',
     },
@@ -120,7 +120,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'sale_staff',
     },
@@ -129,7 +129,7 @@ export class ProformDetail extends Entity {
 
   @property({
     type: 'number',
-    required: true,
+    jsonSchema: {nullable: true},
     mysql: {
       columnName: 'sale_training',
     },

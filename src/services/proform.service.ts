@@ -1,8 +1,9 @@
 import {bind, /* inject, */ BindingScope} from '@loopback/core';
 import {IsolationLevel, repository} from '@loopback/repository';
 import {HttpErrors} from '@loopback/rest';
+import * as _ from 'lodash';
 import {AppStatusForm} from '../appKeys';
-import {Proform, ProformDetail} from '../models';
+import {Client, College, Proform, User} from '../models';
 import {ProformRepository} from '../repositories';
 
 @bind({scope: BindingScope.TRANSIENT})
@@ -19,6 +20,15 @@ export class ProformService {
    */
   public async findActiveAll(): Promise<Proform[] | null> {
     return this.proformRepository.find({where: {status: AppStatusForm.active}});
+  }
+
+  /**
+   * @description Gets a project by Id
+   * @returns {Promise<ProformRepository | null>}
+   * @public
+   */
+  public async findById(id: number): Promise<Proform[] | null> {
+    return this.proformRepository.find({where: {id: id}, include: [{relation: 'proformDetail'}]});
   }
 
   /**
@@ -40,6 +50,7 @@ export class ProformService {
     const tr = await this.proformRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
 
     try {
+
       const result = await this.proformRepository.create(proform, {
         transaction: tr,
       });
@@ -80,8 +91,38 @@ export class ProformService {
     }
   }
 
-  createProjectsRow(row: any) {
-    const proformDetail = new ProformDetail();
+  matchUser(userName: string, user: User[]): User | undefined {
+    let userSel = _.find(user, (x) => x.name === userName);
+    if (_.isNil(userSel)) {
+      userSel = _.find(user, (x) => x.id === 1);
+    }
+    return userSel;
+
+  }
+
+  matchCollege(collegeName: string, college: College[]): College | undefined {
+    let collegeSel = _.find(college, (x) => x.name === collegeName);
+    if (_.isNil(collegeSel)) {
+      collegeSel = _.find(college, (x) => x.id === 1);
+    }
+    return collegeSel;
+
+  }
+
+  matchClient(clientName: string, client: Client[]): Client | undefined {
+    let clientSel = _.find(client, (x) => x.name === clientName);
+    if (_.isNil(clientSel)) {
+      clientSel = _.find(client, (x) => x.id === 1);
+    }
+    return clientSel;
+
+  }
+
+  createProform(row: any) {
+    const proform = new Proform();
+
+    console.log(row);
+
     /*
         proformDetail.price =
 
@@ -94,7 +135,7 @@ export class ProformService {
         project.recCutTotP = 0;
         project.awdAmt = 0;
     */
-    return proformDetail;
+    return proform;
   }
 
 

@@ -25,7 +25,7 @@ export class ProformdetailController {
     },
   })
   async create(
-    @param.path.number('id') id: number,
+    @param.path.string('id') id: string,
     @requestBody({
       content: {
         'application/json': {
@@ -35,6 +35,6 @@ export class ProformdetailController {
     })
     proformDetail: Omit<ProformDetail, 'id'>,
   ): Promise<ProformDetail> {
-    return this.proformDetailService.create(id, proformDetail);
+    return this.proformDetailService.create(Number(id), proformDetail);
   }
 }

@@ -1,6 +1,6 @@
 // Uncomment these imports to begin using these cool features!
 import {BindingKey, inject} from '@loopback/context';
-import {get, getModelSchemaRef, post, requestBody} from '@loopback/rest';
+import {get, getModelSchemaRef, param, post, requestBody} from '@loopback/rest';
 import {Proform, ProformDetail} from '../models';
 import {ProformService} from '../services';
 
@@ -25,7 +25,21 @@ export class ProformController {
     return this.proformService.findActiveAll();
   }
 
-  @post('proform/{id}/proform', {
+  @get('/proform/{id}', {
+    responses: {
+      '200': {
+        description: 'Proform model instance',
+        content: {
+          'application/json': {schema: getModelSchemaRef(Proform)},
+        },
+      },
+    },
+  })
+  async findProformByid(@param.path.number('id') id: number): Promise<Proform[] | null> {
+    return this.proformService.findById(id);
+  }
+
+  @post('proform/create', {
     responses: {
       '200': {
         description: 'Proform model instance',
