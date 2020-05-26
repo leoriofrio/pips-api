@@ -103,7 +103,7 @@ export class Product extends Entity {
   region: string;
 
   @hasMany(() => ProformDetail, {
-    keyTo: 'user_id'
+    keyTo: 'product_id'
   })
   proformDetail?: ProformDetail[];
 

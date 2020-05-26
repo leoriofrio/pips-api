@@ -1,5 +1,7 @@
 import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
 import {UserWithRelations} from '.';
+import {Client, ClientWithRelations} from './client.model';
+import {College, CollegeWithRelations} from './college.model';
 import {ProformDetail, ProformDetailRelations} from './proformdetail.model';
 import {User} from './user.model';
 
@@ -18,6 +20,18 @@ import {User} from './user.model';
         entity: 'user',
         entityKey: 'id',
         foreignKey: 'user_id',
+      },
+      fk_project_college: {
+        name: 'FK_PROJECTS_RELATIONSHIP_COLLEGE',
+        entity: 'college',
+        entityKey: 'id',
+        foreignKey: 'college_id',
+      },
+      fk_project_client: {
+        name: 'FK_PROJECTS_RELATIONSHIP_CLIENT',
+        entity: 'client',
+        entityKey: 'id',
+        foreignKey: 'client_id',
       }
     }
   },
@@ -58,23 +72,27 @@ export class Proform extends Entity {
     })
   user_id: number;
 
-  @property({
-    type: 'number',
-    required: true,
-    mysql: {
-      columnName: 'college_id',
-    },
-  })
-  colleges_id: string;
+  @belongsTo(() => College,
+    {keyTo: 'id', name: 'college'},
+    {
+      type: 'number',
+      required: true,
+      mysql: {
+        columnName: 'college_id',
+      },
+    })
+  college_id: number;
 
-  @property({
-    type: 'number',
-    required: true,
-    mysql: {
-      columnName: 'client_id',
-    },
-  })
-  client_id: string;
+  @belongsTo(() => Client,
+    {keyTo: 'id', name: 'client'},
+    {
+      type: 'number',
+      required: true,
+      mysql: {
+        columnName: 'client_id',
+      },
+    })
+  client_id: number;
 
   @property({
     type: 'date',
@@ -139,6 +157,8 @@ export class Proform extends Entity {
 
 export interface ProformRelations {
   user: UserWithRelations;
+  college: CollegeWithRelations;
+  client: ClientWithRelations;
   proformDetail?: ProformDetailRelations[];
 }
 

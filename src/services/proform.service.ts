@@ -28,7 +28,15 @@ export class ProformService {
    * @public
    */
   public async findById(id: number): Promise<Proform[] | null> {
-    return this.proformRepository.find({where: {id: id}, include: [{relation: 'proformDetail'}]});
+    return this.proformRepository.find({
+      where: {id: id}, include: [{
+        relation: 'proformDetail',
+        scope: {
+          include: [{relation: 'product'}],
+        },
+      },
+      {relation: 'user'}, {relation: 'college'}, {relation: 'client'},]
+    });
   }
 
   /**
