@@ -78,5 +78,19 @@ export class ProformdetailService {
 
   }
 
+  async deleteById(id: number): Promise<void> {
+    if (!this.proformDetailRepository.dataSource.connected) {
+      await this.proformDetailRepository.dataSource.connect();
+    }
+    const tr = await this.proformDetailRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
+    try {
+      await this.proformDetailRepository.deleteById(id, {transaction: tr});
+      await tr.commit();
+    } catch (err) {
+      await tr.rollback();
+      throw err;
+    }
+  }
+
 
 }

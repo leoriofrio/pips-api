@@ -146,5 +146,45 @@ export class ProformService {
     return proform;
   }
 
+  async updateProformById(
+    id: number,
+    proform: any
+  ): Promise<void> {
+
+    return this.updateByIdBase(id, proform, `updateById Proform`);
+  }
+
+  async updateByIdBase(
+    id: number,
+    proform: Proform,
+    transaction: string
+  ): Promise<void> {
+
+    if (!this.proformRepository.dataSource.connected) {
+      await this.proformRepository.dataSource.connect();
+    }
+    const tr = await this.proformRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
+    try {
+      await this.proformRepository.updateById(id, proform, {transaction: tr});
+      await tr.commit();
+    } catch (err) {
+      await tr.rollback();
+      throw err;
+    }
+  }
+
+  async deleteById(id: number): Promise<void> {
+    if (!this.proformRepository.dataSource.connected) {
+      await this.proformRepository.dataSource.connect();
+    }
+    const tr = await this.proformRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
+    try {
+      await this.proformRepository.deleteById(id, {transaction: tr});
+      await tr.commit();
+    } catch (err) {
+      await tr.rollback();
+      throw err;
+    }
+  }
 
 }

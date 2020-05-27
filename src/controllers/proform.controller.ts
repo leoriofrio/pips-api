@@ -1,6 +1,6 @@
 // Uncomment these imports to begin using these cool features!
 import {BindingKey, inject} from '@loopback/context';
-import {get, getModelSchemaRef, param, post, requestBody} from '@loopback/rest';
+import {del, get, getModelSchemaRef, param, patch, post, requestBody} from '@loopback/rest';
 import {Proform, ProformDetail} from '../models';
 import {ProformService} from '../services';
 
@@ -88,5 +88,36 @@ export class ProformController {
     return this.proformService.createDetail(proform, proformDetail)
   }
 
+  @patch('proform/{id}/edit', {
+    responses: {
+      '204': {
+        description: 'Proform PATCH success',
+      },
+    },
+  })
+  async updateProformById(
+    @param.path.number('id') id: number,
+    @requestBody({
+      content: {
+        'application/json': {
+          schema: getModelSchemaRef(Proform, {partial: true}),
+        },
+      },
+    })
+    proform: Omit<Proform, 'id'>,
+  ): Promise<void> {
+    await this.proformService.updateProformById(Number(id), proform);
+  }
+
+  @del('proform/{id}/delete', {
+    responses: {
+      '204': {
+        description: 'Proform Detail DELETE success',
+      },
+    },
+  })
+  async deleteById(@param.path.string('id') id: string): Promise<void> {
+    await this.proformService.deleteById(Number(id));
+  }
 
 }
