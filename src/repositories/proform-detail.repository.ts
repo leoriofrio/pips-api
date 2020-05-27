@@ -9,6 +9,9 @@ export class ProformDetailRepository extends DefaultCrudRepository<
   typeof ProformDetail.prototype.id,
   ProformDetailRelations
   > {
+  beginTransaction(SETTINGS: any) {
+    throw new Error('Method not implemented.');
+  }
   public readonly product: BelongsToAccessor<
     Product,
     typeof Product.prototype.id

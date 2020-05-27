@@ -47,5 +47,36 @@ export class ProformdetailService {
     }
   }
 
+  async updateById(
+    id: number,
+    proformDetail: any
+  ): Promise<void> {
+
+    return this.updateByIdBase(id, proformDetail, `updateById Proform`);
+  }
+
+  async updateByIdBase(
+    id: number,
+    proformDetail: ProformDetail[],
+    transaction: string
+  ): Promise<void> {
+
+    if (!this.proformDetailRepository.dataSource.connected) {
+      await this.proformDetailRepository.dataSource.connect();
+    }
+    const tr = await this.proformDetailRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
+    try {
+      for (const row of proformDetail) {
+        await this.proformDetailRepository.updateById(row.id, row, {transaction: tr});
+      }
+
+      await tr.commit();
+    } catch (err) {
+      await tr.rollback();
+      throw err;
+    }
+
+  }
+
 
 }
