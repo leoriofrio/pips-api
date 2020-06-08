@@ -19,7 +19,11 @@ export class ProformService {
    * @public
    */
   public async findActiveAll(): Promise<Proform[] | null> {
-    return this.proformRepository.find({where: {status: AppStatusForm.active}});
+    return this.proformRepository.find({
+      where: {status: AppStatusForm.active},
+      include: [
+        {relation: 'user'}, {relation: 'college'}, {relation: 'client'},]
+    });
   }
 
   /**
@@ -29,7 +33,8 @@ export class ProformService {
    */
   public async findById(id: number): Promise<Proform[] | null> {
     return this.proformRepository.find({
-      where: {id: id}, include: [{
+      where: {id: id},
+      include: [{
         relation: 'proformDetail',
         scope: {
           include: [{relation: 'product'}],
@@ -150,7 +155,6 @@ export class ProformService {
     id: number,
     proform: any
   ): Promise<void> {
-
     return this.updateByIdBase(id, proform, `updateById Proform`);
   }
 
@@ -160,16 +164,37 @@ export class ProformService {
     transaction: string
   ): Promise<void> {
 
+
     if (!this.proformRepository.dataSource.connected) {
       await this.proformRepository.dataSource.connect();
     }
     const tr = await this.proformRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
+
     try {
       await this.proformRepository.updateById(id, proform, {transaction: tr});
       await tr.commit();
     } catch (err) {
       await tr.rollback();
       throw err;
+    }
+  }
+
+  async updateProformVersion(id: number, proform: Proform | any): Promise<void> {
+    debugger;
+    if (!this.proformRepository.dataSource.connected) {
+      await this.proformRepository.dataSource.connect();
+    }
+    const tr = await this.proformRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
+
+    const trProform = await this.proformRepository.findOne({where: {id: id}})
+    try {
+
+      const result = await this.proformRepository.updateById(id, proform, {transaction: tr});
+      await tr.commit();
+      return result;
+    } catch (error) {
+      await tr.rollback();
+      throw error;
     }
   }
 
