@@ -41,4 +41,49 @@ export class ProductService {
       throw error;
     }
   }
+
+  async updateById(
+    id: number,
+    product: any
+  ): Promise<void> {
+
+    return this.updateByIdBase(id, product, `updateById Product`);
+  }
+
+  async updateByIdBase(
+    id: number,
+    product: Product[],
+    transaction: string
+  ): Promise<void> {
+    if (!this.productRepository.dataSource.connected) {
+      await this.productRepository.dataSource.connect();
+    }
+    const tr = await this.productRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
+    try {
+
+      for (const row of product) {
+        await this.productRepository.updateById(row.id, row, {transaction: tr});
+      }
+
+      await tr.commit();
+    } catch (err) {
+      await tr.rollback();
+      throw err;
+    }
+
+  }
+
+  async deleteById(id: number): Promise<void> {
+    if (!this.productRepository.dataSource.connected) {
+      await this.productRepository.dataSource.connect();
+    }
+    const tr = await this.productRepository.dataSource.beginTransaction(IsolationLevel.READ_COMMITTED);
+    try {
+      await this.productRepository.deleteById(id, {transaction: tr});
+      await tr.commit();
+    } catch (err) {
+      await tr.rollback();
+      throw err;
+    }
+  }
 }
