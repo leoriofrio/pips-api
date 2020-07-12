@@ -39,7 +39,7 @@ export class ProformController {
     return this.proformService.findById(id);
   }
 
-  @post('proform/create', {
+  @post('/proform/create', {
     responses: {
       '200': {
         description: 'Proform model instance',
@@ -63,7 +63,7 @@ export class ProformController {
   }
 
 
-  @post('proform/proformDetail/', {
+  @post('/proform/proformDetail/', {
     responses: {
       '200': {
         description: 'Proform model instance',
@@ -88,7 +88,7 @@ export class ProformController {
     return this.proformService.createDetail(proform, proformDetail)
   }
 
-  @patch('proform/{id}/edit', {
+  @patch('/proform/{id}/edit', {
     responses: {
       '204': {
         description: 'Proform PATCH success',
@@ -109,7 +109,7 @@ export class ProformController {
     await this.proformService.updateProformById(Number(id), proform);
   }
 
-  @del('proform/{id}/delete', {
+  @del('/proform/{id}/delete', {
     responses: {
       '204': {
         description: 'Proform Detail DELETE success',

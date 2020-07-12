@@ -40,7 +40,7 @@ export class ClientController {
     return this.clientService.findActiveClient();
   }
 
-  @post('client', {
+  @post('/client', {
     responses: {
       '200': {
         description: 'Client model instance',
@@ -63,7 +63,7 @@ export class ClientController {
     return this.clientService.create(client);
   }
 
-  @patch('client/edit', {
+  @patch('/client/edit', {
     responses: {
       '204': {
         description: 'Client Detail PATCH success',
@@ -83,7 +83,7 @@ export class ClientController {
     await this.clientService.updateById(client);
   }
 
-  @del('client/{id}/delete', {
+  @del('/client/{id}/delete', {
     responses: {
       '204': {
         description: 'Product Detail DELETE success',

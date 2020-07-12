@@ -5,3 +5,4 @@ export * from './user.controller';
 export * from './client.controller';
 export * from './proform.controller';
 export * from './proformdetail.controller';
+export * from './price.controller';

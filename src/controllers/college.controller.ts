@@ -26,7 +26,7 @@ export class CollegeController {
     return this.collegeService.findByRegion(region);
   }
 
-  @post('college', {
+  @post('/college', {
     responses: {
       '200': {
         description: 'College model instance',
@@ -49,7 +49,7 @@ export class CollegeController {
     return this.collegeService.create(college);
   }
 
-  @patch('college/edit', {
+  @patch('/college/edit', {
     responses: {
       '204': {
         description: 'College Detail PATCH success',
@@ -69,7 +69,7 @@ export class CollegeController {
     await this.collegeService.updateById(college);
   }
 
-  @del('college/{id}/delete', {
+  @del('/college/{id}/delete', {
     responses: {
       '204': {
         description: 'College Detail DELETE success',

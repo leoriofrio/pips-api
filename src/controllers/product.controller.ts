@@ -27,7 +27,7 @@ export class ProductController {
     return this.productService.findByRegion(region);
   }
 
-  @post('product/{id}', {
+  @post('/product/{id}', {
     responses: {
       '200': {
         description: 'Product model instance',
@@ -51,7 +51,7 @@ export class ProductController {
     return this.productService.create(product);
   }
 
-  @patch('product/{id}/edit', {
+  @patch('/product/{id}/edit', {
     responses: {
       '204': {
         description: 'Product Detail PATCH success',
@@ -72,7 +72,7 @@ export class ProductController {
     await this.productService.updateById(Number(id), product);
   }
 
-  @del('product/{id}/delete', {
+  @del('/product/{id}/delete', {
     responses: {
       '204': {
         description: 'Product Detail DELETE success',
