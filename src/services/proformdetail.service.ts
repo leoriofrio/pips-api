@@ -1,5 +1,6 @@
 import {bind, /* inject, */ BindingScope} from '@loopback/core';
 import {IsolationLevel, repository} from '@loopback/repository';
+import _ from 'lodash';
 import {Proform, ProformDetail} from '../models';
 import {ProformDetailRepository, ProformRepository} from '../repositories';
 
@@ -62,6 +63,8 @@ export class ProformdetailService {
     proformDetail: ProformDetail[],
     transaction: string
   ): Promise<void> {
+    let newProformDetail: ProformDetail[] = [];
+    let updateProformDetail: ProformDetail[] = [];
     const trProform = await this.proformRepository.findOne({where: {id: id}})
     if (!this.proformDetailRepository.dataSource.connected) {
       await this.proformDetailRepository.dataSource.connect();
@@ -72,11 +75,39 @@ export class ProformdetailService {
       const numberVersion = Number(trProform?.state_number) + 1;
       objProform.state_number = numberVersion as any;
       //objProform.number_proform = trProform?.number_proform.toString() + 'C' as any;
+      const trProformDetail = await this.proformRepository.find(
+        {
+          where: {id: id},
+          include: [{
+            relation: 'proformDetail',
+          }]
+        });
+
+      //Delete
+      for (const rowDetail of trProformDetail[0].proformDetail as any) {
+        if (_.isUndefined(_.find(proformDetail, {'id': rowDetail.id}))) {
+          await this.proformDetailRepository.deleteById(rowDetail.id, {transaction: tr});
+        }
+      }
+      //New product
+      for (const rowNew of proformDetail) {
+        if (_.isNil(rowNew.id)) {
+          rowNew.proform_id = id;
+          newProformDetail.push(rowNew);
+        } else {
+          updateProformDetail.push(rowNew);
+        }
+      }
+      if (newProformDetail.length > 0) {
+        for (const rowAdd of newProformDetail) {
+          delete rowAdd['id'];
+          await this.proformDetailRepository.create(rowAdd, {transaction: tr, });
+        }
+      }
 
       await this.proformRepository.updateById(id, objProform, {transaction: tr});
 
-
-      for (const row of proformDetail) {
+      for (const row of updateProformDetail) {
         await this.proformDetailRepository.updateById(row.id, row, {transaction: tr});
       }
 
