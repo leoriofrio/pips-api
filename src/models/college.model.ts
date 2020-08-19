@@ -23,7 +23,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'codSantillana',
     },
@@ -32,7 +31,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'codInstituto',
     },
@@ -41,7 +39,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'status',
     },
@@ -50,7 +47,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'delegateText',
     },
@@ -59,7 +55,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'delegateEnglish',
     },
@@ -68,7 +63,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'delegateShared',
     },
@@ -77,7 +71,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'province',
     },
@@ -86,7 +79,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'canton',
     },
@@ -95,7 +87,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'parish',
     },
@@ -113,7 +104,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'address',
     },
@@ -122,7 +112,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'nivel',
     },
@@ -131,7 +120,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'type',
     },
@@ -140,7 +128,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'schoolSystem',
     },
@@ -149,7 +136,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'modality',
     },
@@ -158,7 +144,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'schoolDay',
     },
@@ -167,7 +152,6 @@ export class College extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'region',
     },

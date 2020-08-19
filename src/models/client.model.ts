@@ -23,7 +23,6 @@ export class Client extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'codClient',
     },
@@ -32,7 +31,6 @@ export class Client extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'province',
     },
@@ -41,7 +39,6 @@ export class Client extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'city',
     },
@@ -50,7 +47,6 @@ export class Client extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'name',
     },
@@ -59,7 +55,6 @@ export class Client extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'nickName',
     },
@@ -68,7 +63,6 @@ export class Client extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'type',
     },
@@ -78,7 +72,6 @@ export class Client extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'status',
     },

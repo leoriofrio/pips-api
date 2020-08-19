@@ -32,7 +32,6 @@ export class Product extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'subline',
     },
@@ -50,7 +49,6 @@ export class Product extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'serie',
     },
@@ -59,7 +57,6 @@ export class Product extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'nivel',
     },
@@ -68,7 +65,6 @@ export class Product extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'degree',
     },
@@ -77,7 +73,6 @@ export class Product extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'businessLine',
     },
@@ -86,7 +81,6 @@ export class Product extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'isbn',
     },
@@ -95,7 +89,6 @@ export class Product extends Entity {
 
   @property({
     type: 'string',
-    required: true,
     mysql: {
       columnName: 'region',
     },
