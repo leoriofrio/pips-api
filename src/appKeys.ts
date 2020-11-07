@@ -34,13 +34,15 @@ export namespace QVRCuratedProformDetailColumns {
   export const PRICE = {prop: 'price', name: 'Precio'};
   export const SUB_TOTAL = {prop: 'subtotal', name: 'Subtotal'};
   export const SALE_DIRECT = {prop: 'sale_direct', name: 'DIRECTO'};
-  export const SALE_EXTERNAL_LIBRARY = {prop: 'sale_external_library', name: 'LIBRERÍA EXTERNA'};
-  export const SALE_EVENT = {prop: 'sale_event', name: 'Material Promocional Premios para eventos'};
-  export const SALE_TEACHER = {prop: 'sale_teacher', name: 'Material Promocional para profesores'};
-  export const SALE_INFRASTRUCTURE = {prop: 'sale_infrastructure', name: 'Infraestructura PLANTEL'};
-  export const SALE_SCHOLARSHIPS = {prop: 'sale_scholarships', name: 'Becas PLANTEL'};
-  export const SALE_STAFF = {prop: 'sale_staff', name: 'Equipos PLANTEL'};
-  export const SALE_TRAINING = {prop: 'sale_training', name: 'Capacitación PLANTEL'};
+  export const SALE_DONATION = {prop: 'sale_donation', name: 'Donación'};
+  export const SALE_EXTERNAL_LIBRARY = {prop: 'sale_external_library', name: 'Librería'};
+  export const SALE_EVENT = {prop: 'sale_event', name: 'Premios'};
+  export const SALE_TEACHER = {prop: 'sale_teacher', name: 'Profesores'};
+  export const SALE_INFRASTRUCTURE = {prop: 'sale_infrastructure', name: 'Infraestructura'};
+  export const SALE_SCHOLARSHIPS = {prop: 'sale_scholarships', name: 'Becas'};
+  export const SALE_STAFF = {prop: 'sale_staff', name: 'Equipos'};
+  export const SALE_TRAINING = {prop: 'sale_training', name: 'Capacitación'};
   export const CAPEX = {prop: 'capex', name: 'CAPEX'};
   export const TOTAL = {prop: 'total', name: 'Total'};
+  export const QUANTITY_CHECK = {prop: 'quantity_check', name: 'Entregado'};
 }

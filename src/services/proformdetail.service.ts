@@ -11,7 +11,7 @@ export class ProformdetailService {
     public proformDetailRepository: ProformDetailRepository,
     @repository(ProformRepository)
     public proformRepository: ProformRepository,
-  ) {}
+  ) { }
 
   /**
    * @description Gets the list of the products
@@ -38,6 +38,7 @@ export class ProformdetailService {
     try {
       for (const row of proformDetail) {
         row.proform_id = id;
+        row.quantity_check = row.quantity;
         await this.proformDetailRepository.create(row, {
           transaction: tr,
         });

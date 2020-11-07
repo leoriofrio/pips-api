@@ -77,6 +77,15 @@ export class ProformDetail extends Entity {
     type: 'number',
     jsonSchema: {nullable: true},
     mysql: {
+      columnName: 'sale_donation',
+    },
+  })
+  sale_donation: string;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    mysql: {
       columnName: 'sale_external_library',
     },
   })
@@ -144,6 +153,15 @@ export class ProformDetail extends Entity {
     },
   })
   capex: string;
+
+  @property({
+    type: 'number',
+    jsonSchema: {nullable: true},
+    mysql: {
+      columnName: 'quantity_check',
+    },
+  })
+  quantity_check: string;
 
   @belongsTo(() => Proform,
     {keyTo: 'id', name: 'proform'},
